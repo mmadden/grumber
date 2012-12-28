@@ -1,0 +1,12 @@
+{
+  "name": "todo-example",
+  "version": "0.0.0",
+  "description": "'TodoMVC Ember example with buildtools and tests'",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": "",
+  "author": "Trek Glowacki <trek.glowacki@gmail.com>",
+  "license": "BSD"
+}
