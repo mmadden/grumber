@@ -15,7 +15,7 @@
     "grunt-contrib-uglify": "~0.1.0",
     "grunt-contrib-jshint": "~0.1.0",
     "grunt-contrib-qunit": "~0.1.0",
-    "grunt-ember-templates": "~0.4.0",
+    "grunt-ember-templates": "git://github.com/trek/grunt-ember-templates.git#update-to-grunt-0.4.0a",
     "grunt-contrib-watch": "~0.1.4"
   }
 }
