@@ -1,0 +1,52 @@
+Todos.TodosController = Ember.ArrayController.extend({
+  filterBy: 'all',
+
+  total: function() {    
+    return this.get( 'length' );
+  }.property( '@each.length' ),
+
+  remaining: function() {
+    return this.filterProperty( 'completed', false ).get( 'length' );
+  }.property( '@each.completed' ),
+
+  completed: function() {
+    return this.filterProperty( 'completed', true ).get( 'length' );
+  }.property( '@each.completed' ),
+
+  noneLeft: function() {
+    return this.get( 'total' ) === 0;
+  }.property( 'total' ),
+
+  allAreDone: function( key, value ) {
+    if ( value !== undefined ) {
+      this.setEach( 'completed', value );
+      return value;
+    } else {
+      return !!this.get( 'length' ) &&
+        this.everyProperty( 'completed', true );
+    }
+  }.property( '@each.completed' ),
+
+  oneLeft: function() {
+    return this.get( 'remaining' ) === 1;
+  }.property( 'remaining' ),
+
+  filterIsAll: function(){
+    return this.get('filterBy') === 'all';
+  }.property('filterBy'),
+
+  filterIsActive: function(){
+    return this.get('filterBy') === 'active';
+  }.property('filterBy'),
+  
+  filterIsCompleted: function(){
+    return this.get('filterBy') === 'completed';
+  }.property('filterBy'),
+  
+  clearCompleted: function(){
+    var target = this.get('target');
+    this.filterProperty('completed', true).forEach(function(todo){
+      target.send('removeTodo', todo);
+    });
+  }
+});
