@@ -5,7 +5,7 @@ Todos.TodoEntryField = Ember.TextField.extend({
     var value = this.get( 'value' );
 
     if ( value ) {
-      this.get( 'controller.target' ).send('createTodo', value );
+      this.get( 'controller' ).send('createTodo', value );
       this.set( 'value', '' );
     }
   }
