@@ -9,8 +9,6 @@ Todos.ActiveTodosRoute = Ember.Route.extend({
     });
   },
   setupControllers: function(controller, model) {
-    if (controller) {
-      controller.set('content', model);
-    }
+    this.controllerFor('filteredTodos').set('content', model);
   }
 });

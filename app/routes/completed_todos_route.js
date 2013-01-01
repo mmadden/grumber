@@ -9,9 +9,6 @@ Todos.CompletedTodosRoute = Ember.Route.extend({
     });
   },
   setupControllers: function(controller, model) {
-    console.log(arguments);
-    if (controller) {
-      controller.set('content', model);
-    }
-  },
+    this.controllerFor('filteredTodos').set('content', model);
+  }
 });

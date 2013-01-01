@@ -34831,10 +34831,6 @@ Todos.TodosController = Ember.ArrayController.extend({
 (function() {
 
 Todos.FilteredTodosController = Ember.ArrayController.extend({
-  init: function(o){
-    this._super(o);
-    window.X = this;
-  },
   toggleTodo: function(event){
     var todo = event.context;
     todo.toggleProperty('completed');
@@ -34880,9 +34876,7 @@ Todos.ActiveTodosRoute = Ember.Route.extend({
     });
   },
   setupControllers: function(controller, model) {
-    if (controller) {
-      controller.set('content', model);
-    }
+    this.controllerFor('filteredTodos').set('content', model);
   }
 });
 
@@ -34901,11 +34895,8 @@ Todos.CompletedTodosRoute = Ember.Route.extend({
     });
   },
   setupControllers: function(controller, model) {
-    console.log(arguments);
-    if (controller) {
-      controller.set('content', model);
-    }
-  },
+    this.controllerFor('filteredTodos').set('content', model);
+  }
 });
 
 })();
