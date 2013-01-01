@@ -1,20 +1,18 @@
 require('dependencies/jquery-1.8.3');
 require('dependencies/ember');
-require('dependencies/compiled_templates');
+require('dependencies/compiled/templates');
 
 window.Todos = Ember.Application.create({
-  VERSION: '1.0',
   rootElement: '#todoapp',
   storeNamespace: 'todos-emberjs'
 });
 
 // model layer
-require('app/models/store');
 require('app/models/todo');
 
 // view layer
 require('app/views/edit_todo_textfield');
-require('app/views/todo_entry_field');
+require('app/views/create_todo_textfield');
 
 // controller layer
 require('app/controllers/todos_controller');

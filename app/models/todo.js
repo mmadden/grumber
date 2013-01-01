@@ -1,3 +1,5 @@
+require('app/models/store');
+
 Todos.Todo = Ember.Object.extend({
   id: null,
   title: null,

@@ -10,8 +10,14 @@ module.exports = function(grunt) {
       'build/application.js': 'app/app.js'
     },
     watch: {
-      files: ['dependencies/ember.js','app/**/*.js', 'app/**/*.hbs'],
-      tasks: ['develop']
+      application_code: {
+        files: ['dependencies/ember.js', 'app/**/*.js'],
+        tasks: ['neuter']
+      },
+      handlebars_templates: {
+        files: ['app/**/*.hbs'],
+        tasks: ['ember_templates', 'neuter']
+      }
     },
     // qunit: {
     //   all: ['test/**/*.html']
@@ -28,7 +34,7 @@ module.exports = function(grunt) {
           return sourceFile.replace(/app\/templates\//, '');
         }
       },
-      'dependencies/compiled_templates.js': ["app/templates/*.hbs"]
+      'dependencies/compiled/templates.js': ["app/templates/*.hbs"]
     },
     test_runner_file: {
       all: ['test/**/*_test.js']
@@ -57,5 +63,4 @@ module.exports = function(grunt) {
 
   // Default task.
   // grunt.registerTask('default', ['jshint', 'neuter', 'test_runner_file', 'qunit']);
-  grunt.registerTask('develop', ['ember_templates', 'neuter']);
 };
