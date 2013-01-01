@@ -142,8 +142,8 @@ if ('undefined' !== typeof window) {
 
 })();
 
-// Version: v1.0.0-pre.2-231-g3fbf4b8
-// Last commit: 3fbf4b8 (2012-12-29 23:21:28 -0800)
+// Version: v1.0.0-pre.2-240-ga80b4e8
+// Last commit: a80b4e8 (2013-01-01 08:10:52 -0600)
 
 
 (function() {
@@ -5935,27 +5935,31 @@ define("rsvp",
     var noop = function() {};
 
     var invokeCallback = function(type, promise, callback, event) {
-      var value, error;
+      var hasCallback = typeof callback === 'function',
+          value, error, succeeded, failed;
 
-      if (callback) {
+      if (hasCallback) {
         try {
           value = callback(event.detail);
+          succeeded = true;
         } catch(e) {
+          failed = true;
           error = e;
         }
       } else {
         value = event.detail;
+        succeeded = true;
       }
 
-      if (value instanceof Promise) {
+      if (value && typeof value.then === 'function') {
         value.then(function(value) {
           promise.resolve(value);
         }, function(error) {
           promise.reject(error);
         });
-      } else if (callback && value) {
+      } else if (hasCallback && succeeded) {
         promise.resolve(value);
-      } else if (error) {
+      } else if (failed) {
         promise.reject(error);
       } else {
         promise[type](value);
@@ -6105,16 +6109,20 @@ function isSingleton(container, fullName) {
   return singleton !== false;
 }
 
-function applyInjections(container, value, injections) {
-  if (!injections) { return; }
+function buildInjections(container, injections) {
+  var hash = {};
+
+  if (!injections) { return hash; }
 
   var injection, lookup;
 
   for (var i=0, l=injections.length; i<l; i++) {
     injection = injections[i];
     lookup = container.lookup(injection.fullName);
-    container.set(value, injection.property, lookup);
+    hash[injection.property] = lookup;
   }
+
+  return hash;
 }
 
 function option(container, fullName, optionName) {
@@ -6144,13 +6152,14 @@ function instantiate(container, fullName) {
   }
 
   if (factory) {
-    value = factory.create({ container: container });
-
     var injections = [];
     injections = injections.concat(container.typeInjections[type] || []);
     injections = injections.concat(container.injections[fullName] || []);
 
-    applyInjections(container, value, injections);
+    var hash = buildInjections(container, injections);
+    hash.container = container;
+
+    value = factory.create(hash);
 
     return value;
   }
@@ -9734,8 +9743,7 @@ var get = Ember.get,
   @namespace Ember
   @extends Ember.Mixin
  */
-Ember.Deferred = Ember.Mixin.create({
-
+Ember.DeferredMixin = Ember.Mixin.create({
   /**
     Add handlers to be called when the Deferred object is resolved or rejected.
 
@@ -9744,7 +9752,8 @@ Ember.Deferred = Ember.Mixin.create({
     @param {Function} failCallback a callback function to be called when failed
   */
   then: function(doneCallback, failCallback) {
-    return get(this, 'promise').then(doneCallback, failCallback);
+    var promise = get(this, 'promise');
+    promise.then.apply(promise, arguments);
   },
 
   /**
@@ -9769,6 +9778,7 @@ Ember.Deferred = Ember.Mixin.create({
     return new RSVP.Promise();
   })
 });
+
 
 })();
 
@@ -11578,6 +11588,27 @@ Ember._PromiseChain = Ember.Object.extend({
 
 
 (function() {
+var DeferredMixin = Ember.DeferredMixin, // mixins/deferred
+    EmberObject = Ember.Object,          // system/object
+    get = Ember.get;
+
+var Deferred = Ember.Object.extend(DeferredMixin);
+
+Deferred.reopenClass({
+  promise: function(callback, binding) {
+    var deferred = Deferred.create();
+    callback.call(binding, deferred);
+    return get(deferred, 'promise');
+  }
+});
+
+Ember.Deferred = Deferred;
+
+})();
+
+
+
+(function() {
 /**
 @module ember
 @submodule ember-runtime
@@ -12036,7 +12067,7 @@ Ember Runtime
 */
 
 var jQuery = Ember.imports.jQuery;
-Ember.assert("Ember Views require jQuery 1.7 or 1.8", jQuery && (jQuery().jquery.match(/^1\.(7(?!$)(?!\.[01])|8)(\.\d+)?(pre|rc\d?)?/) || Ember.ENV.FORCE_JQUERY));
+Ember.assert("Ember Views require jQuery 1.7 (>= 1.7.2) or 1.8", jQuery && (jQuery().jquery.match(/^1\.(7(?!$)(?!\.[01])|8)(\.\d+)?(pre|rc\d?)?/) || Ember.ENV.FORCE_JQUERY));
 
 /**
   Alias for jQuery
@@ -22299,24 +22330,10 @@ function normalizeOptions(route, name, template, options) {
 function setupView(view, container, options) {
   var containerView;
 
-  // Trying to set a template on a container view won't work,
-  // so instead create a new default view with the template
-  // and set it as the container view's `currentView`
-  if (view instanceof Ember.ContainerView && options.template) {
-    containerView = view;
-    view = null;
-  }
-
   view = view || container.lookup('view:default');
 
   set(view, 'template', options.template);
   set(view, 'viewName', options.name);
-
-  if (containerView) {
-    set(containerView, 'currentView', view);
-    view = containerView;
-  }
-
   set(view, 'controller', options.controller);
 
   return view;
@@ -23568,12 +23585,7 @@ Ember.Application.reopenClass({
   buildContainer: function(namespace) {
     var container = new Ember.Container();
     Ember.Container.defaultContainer = container;
-    var ApplicationView = Ember.ContainerView.extend({
-      currentView: Ember.computed(function(key, value) {
-        if (arguments.length > 1) { return value; }
-        return get(this, '_outlets.main');
-      }).property('_outlets.main')
-    });
+    var ApplicationView = Ember.View.extend();
 
     container.set = Ember.set;
     container.resolve = resolveFor(namespace);
@@ -23591,6 +23603,10 @@ Ember.Application.reopenClass({
     // Register a fallback application view. App.ApplicationView will
     // take precedence.
     container.register('view', 'application', ApplicationView);
+    if (Ember.Handlebars) {
+      var template = Ember.Handlebars.compile("{{outlet}}");
+      container.register('template', 'application', template);
+    }
 
     return container;
   }
@@ -24904,8 +24920,8 @@ Ember States
 
 
 })();
-// Version: v1.0.0-pre.2-231-g3fbf4b8
-// Last commit: 3fbf4b8 (2012-12-29 23:21:28 -0800)
+// Version: v1.0.0-pre.2-240-ga80b4e8
+// Last commit: a80b4e8 (2013-01-01 08:10:52 -0600)
 
 
 (function() {
