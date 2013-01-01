@@ -34858,6 +34858,11 @@ Todos.AllTodosRoute = Ember.Route.extend({
     this.render('todos_list', {
       into: 'todos'
     });
+  },
+  events: {
+    toggleTodo: function(route, todo){
+      todo.toggleProperty('completed');
+    }
   }
 });
 
