@@ -1,6 +1,4 @@
 Todos.TodosController = Ember.ArrayController.extend({
-  filterBy: 'all',
-
   total: function() {    
     return this.get( 'length' );
   }.property( '@each.length' ),
@@ -25,7 +23,7 @@ Todos.TodosController = Ember.ArrayController.extend({
       return !!this.get( 'length' ) &&
         this.everyProperty( 'completed', true );
     }
-  }.property( '@each.completed' ),
+  }.property( 'completed' ),
 
   oneLeft: function() {
     return this.get( 'remaining' ) === 1;
