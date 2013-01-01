@@ -30,18 +30,6 @@ Todos.TodosController = Ember.ArrayController.extend({
   oneLeft: function() {
     return this.get( 'remaining' ) === 1;
   }.property( 'remaining' ),
-
-  filterIsAll: function(){
-    return this.get('filterBy') === 'all';
-  }.property('filterBy'),
-
-  filterIsActive: function(){
-    return this.get('filterBy') === 'active';
-  }.property('filterBy'),
-  
-  filterIsCompleted: function(){
-    return this.get('filterBy') === 'completed';
-  }.property('filterBy'),
   
   clearCompleted: function(){
     var target = this.get('target');
