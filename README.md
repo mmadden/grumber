@@ -25,7 +25,7 @@ need to be checked into version control.
     using node, but you could really use any programming language that you're
     familiar with: ruby, python, Java – your call.
 
-    I picked node for a few reasons: I can't guarantee you'll know a language
+    I picked node for a one reason: I can't guarantee you'll know a language
     other than JavaScript.
 
     Granted, I can't guarantee you'll be familiar with the node environment
@@ -34,7 +34,7 @@ need to be checked into version control.
 
   * Concatenated or Compiled files – specifically `build/application.js` and the
     contents of `dependencies/compiled/`
-
+    
     `dependencies/compiled/` is where local template files (in Handlebars
     format) are written after they've been compiled into functions.
 
@@ -43,7 +43,7 @@ need to be checked into version control.
 
 ### .jshintrc
 This project uses [JSHint](http://www.jshint.com/) for
-[linting)[http://en.wikipedia.org/wiki/Lint_(software)] to enforce some coding
+[linting](http://en.wikipedia.org/wiki/Lint_(software))to enforce some coding
 standards and avoid common programming mistakes (like missing `var` statements
 causing variables to leak into the global scope). These settings are stored as a
 dot file so that while developing you can connect the project standards into
