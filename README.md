@@ -43,7 +43,7 @@ need to be checked into version control.
 
 ### .jshintrc
 This project uses [JSHint](http://www.jshint.com/) for
-[linting](http://en.wikipedia.org/wiki/Lint_(software))to enforce some coding
+[linting](http://en.wikipedia.org/wiki/Lint_(software\)) to enforce some coding
 standards and avoid common programming mistakes (like missing `var` statements
 causing variables to leak into the global scope). These settings are stored as a
 dot file so that while developing you can connect the project standards into
