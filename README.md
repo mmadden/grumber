@@ -111,7 +111,8 @@ src="application.js"></script>`. `application.js` is file that will be compiled
 (and place here) as part of the build process in development and deployment. You
 don't want this file under version control.
 
-### app/ This is where the actual code of your browser application lives. The
+### app/
+This is where the actual code of your browser application lives. The
 application is also heavily commented. Start reading at `app/app.js` and work
 your way through.
 
