@@ -8,7 +8,6 @@
     init: function(properties){
       this._super(properties);
       var store = localStorage.getItem( get(this, 'name' ));
-      
       set(this, 'data', ( store && JSON.parse( store )) || {}); 
     },
 
@@ -33,7 +32,7 @@
     },
 
     // Delete a model from `this.data`, returning it.
-    remove: function( model ) {
+    destroy: function( model ) {
       delete this.data[ model.get( 'id' ) ];
       this._stash();
 

@@ -6,9 +6,39 @@ module.exports = function(grunt) {
     // uglify: {
     //   'dist/built.min.js': 'dist/built.js'
     // },
+
+    /* 
+       A simple ordered concatenation strategy.
+       This will start at app/app.js and begin
+       adding dependencies in the correct order
+       writing their string contents into
+       'build/application.js'
+
+       Additionally it will wrap them in evals
+       with @ sourceURL statements so errors, log
+       statements and debugging will reference
+       the source files by line number.
+
+       You would set this option to false for 
+       production.
+    */
     neuter: {
+      options: {
+        includeSourceURL: true
+      },
       'build/application.js': 'app/app.js'
     },
+
+    /*
+      Watch files for changes.
+
+      Changes in dependencies/ember.js or application javascript
+      will trigger the neuter task.
+
+      Changes to any templates will trigger the ember_templates
+      task (which writes a new compiled file into dependencies/)
+      and then neuter all the files again.
+    */
     watch: {
       application_code: {
         files: ['dependencies/ember.js', 'app/**/*.js'],
@@ -22,12 +52,34 @@ module.exports = function(grunt) {
     // qunit: {
     //   all: ['test/**/*.html']
     // },
+
+    /* 
+      Reads the projects .jshintrc file and applies coding
+      standards. Doesn't lint the dependencies or test
+      support files.
+    */
     jshint: {
-      all: ['Gruntfile.js', 'app/**/*.js', 'test/**/*.js', '!dependencies/*.*'],
+      all: ['Gruntfile.js', 'app/**/*.js', 'test/**/*.js', '!dependencies/*.*', '!test/support/*.*'],
       options: {
         jshintrc: '.jshintrc'
       }
     },
+
+    /* 
+      Finds Handlebars templates and precompiles them into functions.
+      The provides two benefits:
+
+      1. Templates render much faster
+      2. We only need to include the handlebars-runtime microlib
+         and not the entire Handlebars parser.
+
+      Files will be written out to dependencies/compiled/templates.js
+      which is required within the project files so will end up
+      as part of our application.
+
+      The compiled result will be stored in
+      Ember.TEMPLATES keyed on their file path (with the 'app/templates' stripped)
+    */
     ember_templates: {
       options: {
         templateName: function(sourceFile) {
@@ -35,10 +87,10 @@ module.exports = function(grunt) {
         }
       },
       'dependencies/compiled/templates.js': ["app/templates/*.hbs"]
-    },
-    test_runner_file: {
-      all: ['test/**/*_test.js']
     }
+    // build_test_runner_file: {
+    //   all: ['test/**/*_test.js']
+    // }
   });
   
   // grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -48,8 +100,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-ember-templates');
   
-  // grunt.registerMultiTask('test_runner_file', 'Creates a test runner file.', function(){
-  //   var tmpl = grunt.file.read('test/support/base.html.tmpl');
+  // grunt.registerMultiTask('build_test_runner_file', 'Creates a test runner file.', function(){
+  //   var tmpl = grunt.file.read('test/support/runner.html.tmpl');
   //   var renderingContext = {
   //     data: {
   //       files: this.file.src.map(function(path){
@@ -57,10 +109,13 @@ module.exports = function(grunt) {
   //       })
   //     }
   //   };
-  //   grunt.file.write('test/base.html', grunt.template.process(tmpl, renderingContext));
+  //   grunt.file.write('test/runner.html', grunt.template.process(tmpl, renderingContext));
   // });
   
 
-  // Default task.
-  // grunt.registerTask('default', ['jshint', 'neuter', 'test_runner_file', 'qunit']);
+  // grunt.registerTask('test', ['ember_templates', 'neuter', 'jshint', 'build_test_runner_file', 'qunit']);
+
+  // Default task. Compiles templates, neuters application code, and begins
+  // watching for changes.
+  grunt.registerTask('default', ['ember_templates', 'neuter', 'watch']);
 };
