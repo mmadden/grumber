@@ -12,10 +12,8 @@
     },
 
     createRecord: function(model){
-      if (!get(model,'id')) {
-        set(model, 'id', Date.now());
-        return this.update(model);
-      }
+      set(model, 'id', Date.now());
+      return this.update(model);
     },
 
     update: function(model){
@@ -41,7 +39,7 @@
     },
 
     all: Ember.computed(function() {
-      var data = get(this, 'data') || {};
+      var data = get(this, 'data');
       var all = Ember.A([]);
 
       for(var keyName in data) {

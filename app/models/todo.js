@@ -12,13 +12,15 @@ var store = Todos.Store.create({
   A Simple Todo prototype.
 
   It has properties of 
-    `id`, `title`, and `completed`, although
+    `id`, and `title` although
     it's not necessary to define them on the prototype.
+    They'll get set through user interaction and default to `null` until then.
 
-    They'll get set through user interaction and
-    default to `null` until then.
+    It also has a property of `completed` which defaults
+    to false
 */
 Todos.Todo = Ember.Object.extend({
+  completed: false,
   /*
     A reference to the singleton instance of the 
     localStorage wrapper.

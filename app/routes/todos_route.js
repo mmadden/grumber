@@ -50,7 +50,7 @@ Todos.TodosRoute = Ember.Route.extend({
       When text is entered in Todo creation
       <input> and enter is hit.
     */
-    createTodo: function(route, text){
+    createTodo: function(text){
       if ( !text.trim() ) { return; }
     
       Todos.Todo.createRecord({
@@ -64,7 +64,7 @@ Todos.TodosRoute = Ember.Route.extend({
       or when a user clicks the 'Clear Completed'
       button. 
     */
-    removeTodo: function(route, todo){
+    removeTodo: function(todo){
       Todos.Todo.destroy(todo);
     },
 
@@ -73,7 +73,7 @@ Todos.TodosRoute = Ember.Route.extend({
       This will result in a view changing from
       a text display to an editing input.
     */
-    editTodo: function(route, todo){
+    editTodo: function(todo){
       todo.set('editing', true); 
     },
 
@@ -89,7 +89,7 @@ Todos.TodosRoute = Ember.Route.extend({
       respond to this event to manipulate properties
       of its managed data and then delegate to here.
     */
-    toggleTodo: function(route, todo){
+    toggleTodo: function(todo){
       todo.toggleProperty('completed');
     }
   }

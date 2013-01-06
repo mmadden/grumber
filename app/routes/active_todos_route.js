@@ -33,7 +33,7 @@ Todos.ActiveTodosRoute = Ember.Route.extend({
     The content of that controller will be the 
     return value of the model function above.    
   */
-  renderTemplates: function(){
+  renderTemplate: function(){
     this.render('todos_list', {
       controller: 'filteredTodos'
     });
@@ -67,7 +67,7 @@ Todos.ActiveTodosRoute = Ember.Route.extend({
     https://github.com/emberjs/ember.js/issues/1635
     you should comment if this feels wonky. 
   */
-  setupControllers: function(controller, model) {
+  setupController: function(controller, model) {
     this.controllerFor('filteredTodos').set('content', model);
   }
 });

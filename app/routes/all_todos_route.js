@@ -40,7 +40,7 @@ Todos.AllTodosRoute = Ember.Route.extend({
     but I want to reuse the todos_list template in
     other places.
   */
-  renderTemplates: function(){
+  renderTemplate: function(){
     this.render('todos_list');
   }
 });
