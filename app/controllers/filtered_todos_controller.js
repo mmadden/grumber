@@ -17,8 +17,7 @@ Todos.FilteredTodosController = Ember.ArrayController.extend({
     removed from this controller's content
     after we toggle them.
   */
-  toggleTodo: function(event){
-    var todo = event.context;
+  toggleTodo: function(todo){
     this.get('content').removeObject(todo);
     todo.toggleProperty('completed');
   }

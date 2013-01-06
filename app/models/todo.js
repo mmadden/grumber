@@ -72,7 +72,7 @@ Todos.Todo.reopenClass({
     as often as you like: until todos are added or removed
     it will always return the cached value.
   */
-  all: function(){
-    return this.store.get('all');
+  find: function(){
+    return this.store.get('find');
   }
 });
