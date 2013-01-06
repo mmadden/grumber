@@ -17,7 +17,7 @@ Todos.AllTodosRoute = Ember.Route.extend({
     Here, I'm returning an array-like object of all todos in the store 
   */
   model: function(){
-    return Todos.Todo.find();
+    return Todos.Todo.all();
   },
 
   /* 
@@ -40,7 +40,7 @@ Todos.AllTodosRoute = Ember.Route.extend({
     but I want to reuse the todos_list template in
     other places.
   */
-  renderTemplate: function(){
+  renderTemplates: function(){
     this.render('todos_list');
   }
 });

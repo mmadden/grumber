@@ -12,8 +12,10 @@
     },
 
     createRecord: function(model){
-      set(model, 'id', Date.now());
-      return this.update(model);
+      if (!get(model,'id')) {
+        set(model, 'id', Date.now());
+        return this.update(model);
+      }
     },
 
     update: function(model){
@@ -25,7 +27,7 @@
 
       this._stash();
 
-      this.get('find').addObject(model);
+      this.get('all').addObject(model);
       return model;
     },
 
@@ -34,11 +36,11 @@
       delete this.data[ model.get( 'id' ) ];
       this._stash();
 
-      this.get('find').removeObject(model);
+      this.get('all').removeObject(model);
       return model;
     },
 
-    find: Ember.computed(function(query) {
+    all: Ember.computed(function() {
       var data = get(this, 'data') || {};
       var all = Ember.A([]);
 

@@ -13,7 +13,7 @@ Todos.ActiveTodosRoute = Ember.Route.extend({
     filtered to show only those which are not completed.
   */
   model: function(){
-    return  Todos.Todo.find().filterProperty('completed', false);
+    return  Todos.Todo.all().filterProperty('completed', false);
   },
 
   /* 
@@ -33,7 +33,7 @@ Todos.ActiveTodosRoute = Ember.Route.extend({
     The content of that controller will be the 
     return value of the model function above.    
   */
-  renderTemplate: function(controller){
+  renderTemplates: function(){
     this.render('todos_list', {
       controller: 'filteredTodos'
     });
@@ -67,7 +67,7 @@ Todos.ActiveTodosRoute = Ember.Route.extend({
     https://github.com/emberjs/ember.js/issues/1635
     you should comment if this feels wonky. 
   */
-  setupController: function(controller, model) {
+  setupControllers: function(controller, model) {
     this.controllerFor('filteredTodos').set('content', model);
   }
 });
