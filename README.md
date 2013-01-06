@@ -111,7 +111,8 @@ src="application.js"></script>`. `application.js` is file that will be compiled
 (and place here) as part of the build process in development and deployment. You
 don't want this file under version control.
 
-### app/ This is where the actual code of your browser application lives. The
+### app/
+This is where the actual code of your browser application lives. The
 application is also heavily commented. Start reading at `app/app.js` and work
 your way through.
 
@@ -149,7 +150,7 @@ development tasks with
 grunt
 ```
 
-Which will build development versions of your application and starting watching 
+Which will build development versions of your application and start watching 
 for any changes. See `Gruntfile.js` for a deeper dive into what happens here.
 
 Now you can open `build/index.html` in a browser.
