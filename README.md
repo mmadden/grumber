@@ -150,7 +150,7 @@ development tasks with
 grunt
 ```
 
-Which will build development versions of your application and starting watching 
+Which will build development versions of your application and start watching 
 for any changes. See `Gruntfile.js` for a deeper dive into what happens here.
 
 Now you can open `build/index.html` in a browser.
