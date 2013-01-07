@@ -41,8 +41,12 @@ require('dependencies/compiled/templates');
   should manage for you.
 */
 window.Todos = Ember.Application.create({
-  rootElement: '#todoapp'
+  rootElement: window.TESTING ? '#qunit-fixture' : '#todoapp'
 });
+
+if (window.TESTING) {
+  window.Todos.deferReadiness();
+}
 
 /* 
  * Model layer. 

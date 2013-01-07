@@ -25,7 +25,7 @@
 
       this._stash();
 
-      this.get('all').addObject(model);
+      this.all().addObject(model);
       return model;
     },
 
@@ -34,11 +34,13 @@
       delete this.data[ model.get( 'id' ) ];
       this._stash();
 
-      this.get('all').removeObject(model);
+      this.all().removeObject(model);
       return model;
     },
 
-    all: Ember.computed(function() {
+    all: function(){ return this.get('_all'); },
+
+    _all: Ember.computed(function() {
       var data = get(this, 'data');
       var all = Ember.A([]);
 

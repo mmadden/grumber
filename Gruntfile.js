@@ -49,9 +49,14 @@ module.exports = function(grunt) {
         tasks: ['ember_templates', 'neuter']
       }
     },
-    // qunit: {
-    //   all: ['test/**/*.html']
-    // },
+
+    /* 
+      Runs all .html files found in the test/ directory through PhantomJS.
+      Prints the report in your terminal.
+    */
+    qunit: {
+      all: ['test/**/*.html']
+    },
 
     /* 
       Reads the projects .jshintrc file and applies coding
@@ -87,35 +92,58 @@ module.exports = function(grunt) {
         }
       },
       'dependencies/compiled/templates.js': ["app/templates/*.hbs"]
+    },
+
+    /*
+      Find all the <whatever>_test.js files in the test folder.
+      These will get loaded via script tags when the task is run.
+      This gets run as part of the larger 'test' task registered
+      below.
+    */
+    build_test_runner_file: {
+      all: ['test/**/*_test.js']
     }
-    // build_test_runner_file: {
-    //   all: ['test/**/*_test.js']
-    // }
   });
   
   // grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  // grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-neuter');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-ember-templates');
   
-  // grunt.registerMultiTask('build_test_runner_file', 'Creates a test runner file.', function(){
-  //   var tmpl = grunt.file.read('test/support/runner.html.tmpl');
-  //   var renderingContext = {
-  //     data: {
-  //       files: this.file.src.map(function(path){
-  //         return path.replace('test/', '');
-  //       })
-  //     }
-  //   };
-  //   grunt.file.write('test/runner.html', grunt.template.process(tmpl, renderingContext));
-  // });
+  /*
+    A task to build the test runner html file that get place in
+    /test so it will be picked up by the qunit task. Will
+    place a single <script> tag into the body for every file passed to
+    its coniguration above in the grunt.initConfig above.
+  */
+  grunt.registerMultiTask('build_test_runner_file', 'Creates a test runner file.', function(){
+    var tmpl = grunt.file.read('test/support/runner.html.tmpl');
+    var renderingContext = {
+      data: {
+        files: this.file.src.map(function(path){
+          return path.replace('test/', '');
+        })
+      }
+    };
+    grunt.file.write('test/runner.html', grunt.template.process(tmpl, renderingContext));
+  });
   
+  /*
+    A task to run the application's unit tests via the command line.
+    It will
+      - convert all the handlebars templates into compile functions
+      - combine these files + application files in order
+      - lint the result
+      - build an html file with a script tag for each test file
+      - headlessy load this page and print the test runner results
+  */
+  grunt.registerTask('test', ['ember_templates', 'neuter', 'jshint', 'build_test_runner_file', 'qunit']);
 
-  // grunt.registerTask('test', ['ember_templates', 'neuter', 'jshint', 'build_test_runner_file', 'qunit']);
-
-  // Default task. Compiles templates, neuters application code, and begins
-  // watching for changes.
+  /*
+    Default task. Compiles templates, neuters application code, and begins
+    watching for changes.
+  */
   grunt.registerTask('default', ['ember_templates', 'neuter', 'watch']);
 };

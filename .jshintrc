@@ -14,6 +14,10 @@
   "eqnull": true,
   "browser": true,
   "globals": {
+    "test": true,
+    "equal": true,
+    "ok": true,
+    "sinon": true,
     "require": true,
     "Ember": true,
     "Todos": true

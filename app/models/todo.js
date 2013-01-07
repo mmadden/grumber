@@ -75,6 +75,6 @@ Todos.Todo.reopenClass({
     it will always return the cached value.
   */
   all: function(){
-    return this.store.get('all');
+    return this.store.all();
   }
 });
