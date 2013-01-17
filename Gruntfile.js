@@ -122,8 +122,8 @@ module.exports = function(grunt) {
     var tmpl = grunt.file.read('test/support/runner.html.tmpl');
     var renderingContext = {
       data: {
-        files: this.file.src.map(function(path){
-          return path.replace('test/', '');
+        files: this.filesSrc.map(function(fileSrc){
+          return fileSrc.replace('test/', '');
         })
       }
     };
