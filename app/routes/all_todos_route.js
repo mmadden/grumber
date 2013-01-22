@@ -3,7 +3,7 @@
   todos in the application.
 
 */
-Todos.AllTodosRoute = Ember.Route.extend({
+Todos.TodosAllTodosRoute = Ember.Route.extend({
   /* 
     The data used to render the 
     outer dashboard parts of the application.

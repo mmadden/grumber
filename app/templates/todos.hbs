@@ -33,13 +33,13 @@
   <div>
     <ul id="filters">
       <li>
-        {{#linkTo allTodos currentWhen="allTodos" activeClass="selected"}}All{{/linkTo}}
+        {{#linkTo todos.allTodos currentWhen="allTodos" activeClass="selected"}}All{{/linkTo}}
       </li>
       <li>
-        {{#linkTo activeTodos currentWhen="activeTodos" activeClass="selected"}}Active{{/linkTo}}
+        {{#linkTo todos.activeTodos currentWhen="activeTodos" activeClass="selected"}}Active{{/linkTo}}
       </li>
       <li>
-        {{#linkTo completedTodos currentWhen="completedTodos" activeClass="selected"}}Completed{{/linkTo}}
+        {{#linkTo todos.completedTodos currentWhen="completedTodos" activeClass="selected"}}Completed{{/linkTo}}
       </li>
     </ul>
   <div>

@@ -12,7 +12,7 @@ Todos.EditTodoTextField = Ember.TextField.extend({
 
   */
   change: function(){
-    if (Ember.empty(this.get('value'))) {
+    if (Ember.isEmpty(this.get('value'))) {
       var todo = this.get('controller.content');
       this.get('controller.target').send('removeTodo', todo);
     }

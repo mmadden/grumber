@@ -1,4 +1,4 @@
-Todos.CompletedTodosRoute = Ember.Route.extend({
+Todos.TodosCompletedTodosRoute = Ember.Route.extend({
   /* 
     The data used to render the 
     inner list area of the application.
