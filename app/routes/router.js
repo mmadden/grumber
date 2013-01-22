@@ -16,9 +16,9 @@ require('app/routes/todos_route');
   So, for the routes below to work we
   have to define
     Todos.TodosRoute
-    Todos.TodoAllTodosRoute
-    Todos.TodoActiveTodosRoute
-    Todos.TodoCompletedTodosRoute
+    Todos.TodosAllTodosRoute
+    Todos.TodosActiveTodosRoute
+    Todos.TodosCompletedTodosRoute
 
   Loading the application with any of these
   urls will result in the correct data
