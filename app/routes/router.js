@@ -7,14 +7,18 @@ require('app/routes/todos_route');
   The string argument will be upcased,
   and have 'Route' appended. A matching
   constant will be looked up on your
-  application's namespace.
+  application's namespace. For child
+  routes of a resource, the resource
+  name is upcased and prepended. See
+  http://emberjs.com/guides/routing/defining-your-routes/
+  for more details.
 
   So, for the routes below to work we
   have to define
     Todos.TodosRoute
-    Todos.AllTodosRoute
-    Todos.ActiveTodosRoute
-    Todos.CompletedTodosRoute
+    Todos.TodosAllTodosRoute
+    Todos.TodosActiveTodosRoute
+    Todos.TodosCompletedTodosRoute
 
   Loading the application with any of these
   urls will result in the correct data
@@ -30,10 +34,10 @@ require('app/routes/todos_route');
   you are starting the application directly at a particular
   route or entering that route at a later point.
 */
-Todos.Router.map(function(match) {
-  match("/").to("todos", function(match){
-    match("/").to("allTodos");
-    match("/active").to("activeTodos");
-    match("/completed").to("completedTodos");
+Todos.Router.map(function() {
+  this.resource("todos", {path: "/"}, function(){
+    this.route("allTodos", {path: "/"});
+    this.route("activeTodos", {path: "/active"});
+    this.route("completedTodos", {path: "/completed"});
   });
 });
