@@ -84,7 +84,7 @@ commented.
 This file. You're reading it.
 
 ### dependencies/
-The external libraries required to run the application: Ember,
+The external libraries required to run the application: Ember, Ember Data,
 Handlebars, and jQuery. I could have used a tool like
 [Bower](http://twitter.github.com/bower/) to track and install these but am not.
 No particular reason for that.
