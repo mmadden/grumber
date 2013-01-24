@@ -13,7 +13,7 @@ Todos.TodosCompletedTodosRoute = Ember.Route.extend({
     that is filtered to show only those which are completed.
   */
   model: function(){
-    return Todos.Todo.all().filterProperty('completed', true);
+    return Todos.Todo.find().filterProperty('completed', true);
   },
 
 
