@@ -14,7 +14,9 @@
 <ul id="todo-list">
   {{#each todo in controller}}
     <li {{action editTodo todo on="doubleClick"}} {{bindAttr class=":view todo.completed:completed todo.editing:editing"}}>
-      {{#unless todo.editing}}
+      {{#if todo.editing}}
+        {{view Todos.EditTodoTextField todoBinding="todo"}}
+      {{else}}
         <input type="checkbox" 
                class="toggle" 
                {{bindAttr checked="todo.completed"}}
@@ -22,9 +24,7 @@
          >
         <label>{{todo.title}}</label>
         <button {{action removeTodo todo}} class="destroy" ></button>
-      {{else}}
-        {{view Todos.EditTodoTextField todoBinding="todo"}}
-      {{/unless}}
+      {{/if}}
     </li>
   {{/each}}
 </ul>

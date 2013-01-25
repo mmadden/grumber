@@ -1,3 +1,7 @@
+require('app/routes/all_todos_route');
+require('app/routes/active_todos_route');
+require('app/routes/completed_todos_route');
+
 /* 
   These are child routes of the Todos.TodosRoute.
 
@@ -6,10 +10,6 @@
   file.
 
 */
-require('app/routes/all_todos_route');
-require('app/routes/active_todos_route');
-require('app/routes/completed_todos_route');
-
 /*
   The parent Route of all other Todo related routes.
   Entering this route builds the outer dashboard
@@ -35,7 +35,7 @@ Todos.TodosRoute = Ember.Route.extend({
     Here, I'm returning an array-like object of all todos in the store 
   */
   model: function(){
-    return Todos.Todo.all();
+    return Todos.Todo.find();
   },
 
   /*
@@ -51,11 +51,10 @@ Todos.TodosRoute = Ember.Route.extend({
       <input> and enter is hit.
     */
     createTodo: function(text){
-      if ( !text.trim() ) { return; }
-    
       Todos.Todo.createRecord({
-        title: text
+        title: text,
       });  
+      Todos.store.commit();
     },
 
     /*
@@ -65,7 +64,8 @@ Todos.TodosRoute = Ember.Route.extend({
       button. 
     */
     removeTodo: function(todo){
-      Todos.Todo.destroy(todo);
+      todo.deleteRecord();
+      Todos.store.commit();
     },
 
     /*
@@ -91,6 +91,7 @@ Todos.TodosRoute = Ember.Route.extend({
     */
     toggleTodo: function(todo){
       todo.toggleProperty('completed');
+      Todos.store.commit();
     }
   }
 });

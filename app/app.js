@@ -26,6 +26,8 @@ require('dependencies/handlebars-runtime');
 /* This is Ember. I think you'll like it */
 require('dependencies/ember');
 
+require('dependencies/ember-data');
+
 /*
   this file is generated as part of the build process.
   If you haven't run that yet, you won't see it.
@@ -55,6 +57,7 @@ if (window.TESTING) {
  * doesn't communicate with a server, plain
  * Ember.Objects will do.
 */
+require('app/models/store');
 require('app/models/todo');
 
 /*

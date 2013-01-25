@@ -11,10 +11,12 @@ Todos.EditTodoTextField = Ember.TextField.extend({
     current state (i.e. route).
 
   */
-  change: function(){
+  change: function(event){
     if (Ember.isEmpty(this.get('value'))) {
-      var todo = this.get('controller.content');
-      this.get('controller.target').send('removeTodo', todo);
+      var todo = this.get('todo');
+      if (!todo.get('isDeleted')) {
+        this.get('controller.target').send('removeTodo', todo);
+      }
     }
   },
 

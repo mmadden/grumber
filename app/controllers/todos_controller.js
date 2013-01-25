@@ -19,7 +19,7 @@ Todos.TodosController = Ember.ArrayController.extend({
     todos in the underlying content
   */
   remaining: function() {
-    return this.filterProperty( 'completed', false ).get( 'length' );
+    return this.rejectProperty( 'completed' ).get( 'length' );
   }.property( '@each.completed' ),
 
   /*
@@ -27,7 +27,7 @@ Todos.TodosController = Ember.ArrayController.extend({
     the underlying content whose 'completed' property is true.
   */
   completed: function() {
-    return this.filterProperty( 'completed', true ).get( 'length' );
+    return this.filterProperty( 'completed' ).get( 'length' );
   }.property( '@each.completed' ),
 
   /*
