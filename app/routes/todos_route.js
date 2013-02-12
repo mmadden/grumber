@@ -52,7 +52,7 @@ Todos.TodosRoute = Ember.Route.extend({
     */
     createTodo: function(text){
       Todos.Todo.createRecord({
-        title: text,
+        title: text
       });  
       Todos.store.commit();
     },

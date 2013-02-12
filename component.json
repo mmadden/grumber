@@ -1,0 +1,12 @@
+{
+  "name": "grumber",
+  "version": "0.0.33-0",
+  "dependencies": {
+    "jquery": "~1.8.2",
+    "ember": "~1.0.0-pre.4",
+    "handlebars": "~1.0.0-rc.2",
+    "lodash": "~1.0.0-rc.3",
+    "moment": "~1.7.2",
+    "foundation": "~3.2.5"
+  }
+}

@@ -1,4 +1,4 @@
-require('dependencies/ember-data');
+require('components/ember-data/ember-data');
 /*
   A Simple Todo Model
 

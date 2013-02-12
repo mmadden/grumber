@@ -14,19 +14,19 @@
  * These are the dependencies for an Ember application
  * and they have to be loaded before any application code.
 */
-require('dependencies/jquery-1.8.3');
+require('components/jquery/jquery');
 
 /*
  * Since we're precompiling our templates, we only need the
  * handlebars-runtime microlib instead of the
  * entire handlebars library and its string parsing functions.
 */
-require('dependencies/handlebars-runtime');
+require('components/handlebars.js/handlebars.runtime');
 
 /* This is Ember. I think you'll like it */
-require('dependencies/ember');
+require('components/ember/lib/ember');
 
-require('dependencies/ember-data');
+require('components/ember-data/ember-data');
 
 /*
   this file is generated as part of the build process.
@@ -35,7 +35,7 @@ require('dependencies/ember-data');
   It is excluded from git commits since it's a 
   generated file.
 */
-require('dependencies/compiled/templates');
+require('build/temp/templates');
 
 /*
   Creates a new instance of an Ember application and

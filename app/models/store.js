@@ -1,4 +1,4 @@
-require('dependencies/localstorage_adapter');
+require('components/ember-localstorage-adapter/localstorage_adapter');
 
 /*
   The Ember Data Store
