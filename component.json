@@ -1,6 +1,6 @@
 {
   "name": "grumber",
-  "version": "0.0.33-0",
+  "version": "0.0.0",
   "dependencies": {
     "jquery": "~1.8.2",
     "ember": "~1.0.0-pre.4",
