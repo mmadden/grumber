@@ -21,7 +21,7 @@ require('components/jquery/jquery');
  * handlebars-runtime microlib instead of the
  * entire handlebars library and its string parsing functions.
 */
-require('components/handlebars.js/handlebars.runtime');
+require('components/handlebars/handlebars.runtime');
 
 /* This is Ember. I think you'll like it */
 require('components/ember/lib/ember');
