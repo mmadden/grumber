@@ -160,7 +160,7 @@ module.exports = function (grunt) {
                 bundleExec: false,
                 forcecompile: true,
                 debugsass: true,
-                images: '<%= dirs.staticAssets %>/images'
+                images: '<%= dirs.staticAssets %>'
             },
             dist: {
                 require: 'zurb-foundation',
@@ -171,7 +171,7 @@ module.exports = function (grunt) {
                 bundleExec: false,
                 forcecompile: true,
                 debugsass: false,
-                images: '<%= dirs.staticAssets %>/images'
+                images: '<%= dirs.staticAssets %>'
             }
         },
 
