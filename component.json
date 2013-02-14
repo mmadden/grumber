@@ -1,9 +1,10 @@
 {
-  "name": "grumber",
+  "name": "ProjectNameGoesHere",
   "version": "0.0.0",
   "dependencies": {
     "jquery": "~1.8.2",
     "ember": "~1.0.0-pre.4",
+    "ember-localstorage-adapter": "git://github.com/rpflorence/ember-localstorage-adapter.git",
     "handlebars": "~1.0.0-rc.2",
     "lodash": "~1.0.0-rc.3",
     "moment": "~1.7.2",
