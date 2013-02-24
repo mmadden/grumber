@@ -1,7 +1,7 @@
 # Grumber
 
 Grumber is a starter-kit for client-side JavaScript projects based on
-[Ember](http://emberjs.com/), [Grunt](http://gruntjs.org), and
+[Ember](http://emberjs.com/), [Grunt](http://gruntjs.com), and
 [Foundation](http://foundation.zurb.com/).
 
 It is *neither* a [platypus](http://grooveshark.com/s/Platt+Opus/3iic70?src=5)
@@ -46,7 +46,7 @@ First, ensure all dependencies are installed and up-to-date:
 ### Primary dependencies
 
 * [Node.js](http://nodejs.org/)
-* [Grunt](http://gruntjs.org)
+* [Grunt](http://gruntjs.com)
 `npm install grunt-cli -g`
 * [Bower](http://twitter.github.com/bower/)
 `npm install bower -g`
