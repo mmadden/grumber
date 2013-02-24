@@ -96,7 +96,7 @@ is equivalent) This will build a development version of your application, serve
 it on port 80 (by default), and start watching the source files for changes. See
 `Gruntfile.js` for a deeper dive into what happens here.
 
-Now you can open `localhost` in a browser to load the application.
+Now you can open `localhost:8500` in a browser to load the application.
 
 ### Development build only
 
@@ -128,7 +128,7 @@ and copy the static assets. If it completes successfully the application will be
 ready for deployment from the `build/dist/` folder.
 
 Running `grunt dist` is identical except that it will also start a web server on
-port 80 so you can quickly test the production app on `localhost`.
+port 80 so you can quickly test the production app on `localhost:8500`.
 
 
 ## Files and folders in this project

@@ -254,13 +254,13 @@ module.exports = function (grunt) {
         connect: {
             dev: {
                 options: {
-                    port: 80,
+                    port: 8500,
                     base: '<%= dirs.dev %>'
                 }
             },
             dist: {
                 options: {
-                    port: 80,
+                    port: 8500,
                     base: '<%= dirs.dist %>',
                     keepalive: true
                 }
