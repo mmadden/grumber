@@ -47,9 +47,9 @@ First, ensure all dependencies are installed and up-to-date:
 
 * [Node.js](http://nodejs.org/)
 * [Grunt](http://gruntjs.com)
-`npm install grunt-cli -g`
+`[sudo] npm install grunt-cli -g`
 * [Bower](http://twitter.github.com/bower/)
-`npm install bower -g`
+`[sudo] npm install bower -g`
 * [Ruby](http://www.ruby-lang.org/en/downloads/)
 * [Compass](http://compass-style.org/install/)
 `gem install compass`
@@ -60,7 +60,7 @@ First, ensure all dependencies are installed and up-to-date:
 ### Development dependencies
 From this project folder run
 ```shell
-npm install
+[sudo] npm install
 ```
 
 This will install the development dependencies listed in the `package.json` file
@@ -70,7 +70,7 @@ running the associated Grunt tasks.
 Next, run
 
 ```shell
-bower install
+[sudo] bower install
 ```
 
 This will install the application dependencies listed in our `component.json`
