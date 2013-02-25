@@ -1,9 +1,116 @@
 /*jshint camelcase: false */
 /*global module:false */
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     grunt.log.writeln('Build started ' + new Date().toLocaleString().grey);
+
+    grunt.loadNpmTasks('grunt-bumpx');
+    grunt.loadNpmTasks('grunt-compass');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-ember-templates');
+    grunt.loadNpmTasks('grunt-contrib-qunit');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-neuter');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-replace');
+
+    /*
+     Default task. (what runs when just typing 'grunt' in the console)
+     */
+    grunt.registerTask('default', 'dev');
+
+    /*
+     Dev task. Builds the project for development/debugging, starts
+     an HTTP server, and starts watching source files for changes.
+     */
+    grunt.registerTask('dev', ['build:dev', 'connect:dev', 'watch']);
+
+    /*
+     Dist task. Builds the project for production use and starts
+     an HTTP server.
+     */
+    grunt.registerTask('dist', ['build:dist', 'connect:dist']);
+
+
+    grunt.registerTask('jsBuild', ['ember_templates', 'neuter:dev']);
+    grunt.registerTask('cssBuild', ['compass:dev']);
+
+    /*
+     Build:dev task. Bumps the build version, cleans the dev folder,
+     compiles templates, neuters application code, compiles SCSS,
+     and copies the static assets.
+     */
+    grunt.registerTask('build:dev', [
+        'bump:build',
+        'bumppost',
+        'clean:dev',
+        'jsBuild',
+        'cssBuild',
+        'copy:dev'
+    ]);
+
+    /*
+     Build:dist task. Bumps the patch version, jshint's app JS, cleans
+     the dist folder, compiles templates, neuters application code,
+     minifies JS, SCSS compilation/minification, copies static assets
+     and rewrites index.html JS/CSS references to production files.
+     */
+    grunt.registerTask('build:dist', [
+        'bump:patch',
+        'bumppost',
+        'jshint',
+        'clean:dist',
+        'ember_templates',
+        'neuter:dist',
+        'compass:dist',
+        'uglify',
+        'copy:dist',
+        'replace:dist'
+    ]);
+
+    /*
+     Custom task to update re-load package.json after the bump task
+     and output the project name and version to the console.
+     */
+    grunt.registerTask('bumppost', function() {
+        grunt.log.write('Re-loading package.json and updating grunt.config...');
+        grunt.config.set('pkg', grunt.file.readJSON('package.json'));
+        grunt.log.ok().writeln();
+        grunt.log.writeln(grunt.template.process('<%= pkg.name %> v<%= pkg.version %>').yellow);
+    });
+
+    /*
+     A task to build the test runner html file that get place in
+     /test so it will be picked up by the qunit task. Will
+     place a single <script> tag into the body for every file passed to
+     its configuration above in the grunt.initConfig above.
+     */
+    grunt.registerMultiTask('build_test_runner_file', 'Creates a test runner file.', function() {
+        var tmpl = grunt.file.read('test/support/runner.html.tmpl');
+        var renderingContext = {
+            data: {
+                files: this.filesSrc.map(function(fileSrc) {
+                    return fileSrc.replace('test/', '');
+                })
+            }
+        };
+        grunt.file.write('test/runner.html', grunt.template.process(tmpl, renderingContext));
+    });
+
+    /*
+     A task to run the application's unit tests via the command line.
+     It will
+     - convert all the handlebars templates into compile functions
+     - combine these files + application files in order
+     - lint the result
+     - build an html file with a script tag for each test file
+     - headlessy load this page and print the test runner results
+     */
+    grunt.registerTask('test', ['ember_templates', 'neuter:dev', 'jshint', 'build_test_runner_file', 'qunit']);
 
     grunt.initConfig({
         /*
@@ -107,7 +214,7 @@ module.exports = function (grunt) {
          */
         ember_templates: {
             options: {
-                templateName: function (sourceFile) {
+                templateName: function(sourceFile) {
                     return sourceFile.replace(/app\/templates\//, '');
                 }
             },
@@ -314,117 +421,4 @@ module.exports = function (grunt) {
             all: ['test/**/*_test.js']
         }
     });
-
-    grunt.loadNpmTasks('grunt-bumpx');
-
-    /*
-     Custom task to update re-load package.json after the bump task
-     and output the project name and version to the console.
-     */
-    grunt.registerTask('bumppost', function () {
-        grunt.log.write('Re-loading package.json and updating grunt.config...');
-        grunt.config.set('pkg', grunt.file.readJSON('package.json'));
-        grunt.log.ok().writeln();
-        grunt.log.writeln(grunt.template.process('<%= pkg.name %> v<%= pkg.version %>').yellow);
-    });
-
-    grunt.loadNpmTasks('grunt-compass');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-ember-templates');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-neuter');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-replace');
-
-    /*
-     A task to build the test runner html file that get place in
-     /test so it will be picked up by the qunit task. Will
-     place a single <script> tag into the body for every file passed to
-     its configuration above in the grunt.initConfig above.
-     */
-    grunt.registerMultiTask('build_test_runner_file', 'Creates a test runner file.', function () {
-        var tmpl = grunt.file.read('test/support/runner.html.tmpl');
-        var renderingContext = {
-            data: {
-                files: this.filesSrc.map(function (fileSrc) {
-                    return fileSrc.replace('test/', '');
-                })
-            }
-        };
-        grunt.file.write('test/runner.html', grunt.template.process(tmpl, renderingContext));
-    });
-
-    /*
-     A task to run the application's unit tests via the command line.
-     It will
-     - convert all the handlebars templates into compile functions
-     - combine these files + application files in order
-     - lint the result
-     - build an html file with a script tag for each test file
-     - headlessy load this page and print the test runner results
-     */
-    grunt.registerTask('test', ['ember_templates', 'neuter:dev', 'jshint', 'build_test_runner_file', 'qunit']);
-
-    /*
-     Default task. (what runs when just typing 'grunt' in the console)
-     */
-    grunt.registerTask('default', 'dev');
-
-    /*
-     Dev task. Builds the project for development/debugging, starts
-     an HTTP server, and starts watching source files for changes.
-     */
-    grunt.registerTask('dev', ['build:dev', 'connect:dev', 'watch']);
-
-    /*
-     Dist task. Builds the project for production use and starts
-     an HTTP server.
-     */
-    grunt.registerTask('dist', ['build:dist', 'connect:dist']);
-
-
-    grunt.registerTask('jsBuild', ['ember_templates', 'neuter:dev']);
-    grunt.registerTask('cssBuild', ['compass:dev']);
-
-
-    /*
-     Build:dev task. Bumps the build version, cleans the dev folder,
-     compiles templates, neuters application code, compiles SCSS,
-     and copies the static assets.
-     */
-    grunt.registerTask('build:dev',
-        [
-            'bump:build',
-            'bumppost',
-            'clean:dev',
-            'jsBuild',
-            'cssBuild',
-            'copy:dev'
-        ]
-    );
-
-    /*
-     Build:dist task. Bumps the patch version, jshint's app JS, cleans
-     the dist folder, compiles templates, neuters application code,
-     minifies JS, SCSS compilation/minification, copies static assets
-     and rewrites index.html JS/CSS references to production files.
-     */
-    grunt.registerTask('build:dist',
-        [
-            'bump:patch',
-            'bumppost',
-            'jshint',
-            'clean:dist',
-            'ember_templates',
-            'neuter:dist',
-            'compass:dist',
-            'uglify',
-            'copy:dist',
-            'replace:dist'
-        ]
-    );
 };
