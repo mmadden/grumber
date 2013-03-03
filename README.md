@@ -7,9 +7,7 @@ Grumber is a starter-kit for client-side JavaScript projects based on
 It is *neither* a [platypus](http://grooveshark.com/s/Platt+Opus/3iic70?src=5)
 nor [scaffolding tool](http://github.com/rpflorence/ember-tools).
 
-Special thanks to [Trek Glowacki](http://github.com/trek) for his many
-contributions to the Ember community. Until he shared [this](http://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences),
-I couldn't hack a half-decent Ember build to save my life.
+Special thanks to [Trek Glowacki](http://github.com/trek) for his [ember-todos](http://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences) project.
 
 ## Features
 
@@ -33,10 +31,10 @@ and production minification
 
 ### To Do
 * Foundation 4 integration
-* refactor app templates/styles for Foundation
-* swap out TodoMVC for an "ambitious web application"
-* QUnit tests
+* refactor TodoMVC app templates/styles for Foundation
 * live reload that works on Windows?
+* swap out TodoMVC for an "ambitious web application"
+* QUnit tests?
 
 
 ## Getting Started

@@ -24,7 +24,7 @@ require('components/jquery/jquery');
 require('components/handlebars/handlebars.runtime');
 
 /* This is Ember. I think you'll like it */
-require('components/ember/lib/ember');
+require('components/ember/ember');
 
 require('components/ember-data/ember-data');
 
