@@ -19,7 +19,7 @@ and simple require() statements
 * [Source maps](http://net.tutsplus.com/tutorials/tools-and-tips/source-maps-101/)
 for JS and CSS/SCSS in dev build
 * [Handlebars](http://handlebarsjs.com/) template pre-compiling
-* [Compass](http://compass-style.org/) and [Foundation](http://foundation.zurb.com/)
+* [Compass](http://compass-style.org/) and [Foundation 4](http://foundation.zurb.com/)
 integration with SCSS compilation
 and production minification
 * JS minification with [UglifyJS](http://lisperator.net/uglifyjs/)
@@ -30,7 +30,7 @@ and production minification
 * optional built-in web server for development/testing (enabled by default)
 
 ### To Do
-* Foundation 4 integration
+* ~~Foundation 4 integration~~
 * refactor TodoMVC app templates/styles for Foundation
 * live reload that works on Windows?
 * swap out TodoMVC for an "ambitious web application"
