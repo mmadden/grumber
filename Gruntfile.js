@@ -108,7 +108,7 @@ module.exports = function(grunt) {
      - combine these files + application files in order
      - lint the result
      - build an html file with a script tag for each test file
-     - headlessy load this page and print the test runner results
+     - head-less-ly load this page and print the test runner results
      */
     grunt.registerTask('test', ['ember_templates', 'neuter:dev', 'jshint', 'build_test_runner_file', 'qunit']);
 
@@ -183,7 +183,8 @@ module.exports = function(grunt) {
                 'app/**/*.js',
                 'test/**/*.js',
                 '!<%= dirs.components %>/*.*',
-                '!test/support/*.*'],
+                '!test/support/*.*'
+            ],
             options: {
                 jshintrc: '.jshintrc'
             }
@@ -338,7 +339,7 @@ module.exports = function(grunt) {
                     prefix: ''
                 },
                 files: {
-                    '<%= dirs.dev %>/': ['<%= dirs.staticAssets %>/index.html']
+                    '<%= dirs.dev %>/index.html': ['<%= dirs.staticAssets %>/index.html']
                 }
             },
             dist: {
@@ -350,7 +351,7 @@ module.exports = function(grunt) {
                     prefix: ''
                 },
                 files: {
-                    '<%= dirs.dist %>/': ['<%= dirs.staticAssets %>/index.html']
+                    '<%= dirs.dist %>/index.html': ['<%= dirs.staticAssets %>/index.html']
                 }
             }
         },
