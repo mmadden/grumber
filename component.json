@@ -8,6 +8,6 @@
     "ember-localstorage-adapter": "git://github.com/rpflorence/ember-localstorage-adapter.git",
     "lodash": "~1.0.1",
     "moment": "~2.0.0",
-    "foundation": "~4.0.0"
+    "foundation": "~4.0.4"
   }
 }
