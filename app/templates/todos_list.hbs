@@ -12,19 +12,19 @@
   current state (i.e. route)
 -->
 <ul id="todo-list">
-  {{#each todo in controller}}
-    <li {{action editTodo todo on="doubleClick"}} {{bindAttr class=":view todo.completed:completed todo.editing:editing"}}>
-      {{#if todo.editing}}
-        {{view Todos.EditTodoTextField todoBinding="todo"}}
-      {{else}}
-        <input type="checkbox" 
-               class="toggle" 
-               {{bindAttr checked="todo.completed"}}
-               {{action toggleTodo todo}}
-         >
-        <label>{{todo.title}}</label>
-        <button {{action removeTodo todo}} class="destroy" ></button>
-      {{/if}}
-    </li>
-  {{/each}}
+    {{#each todo in controller}}
+        <li {{action editTodo todo on="doubleClick"}} {{bindAttr class=":view todo.completed:completed todo.editing:editing"}}>
+            {{#if todo.editing}}
+                {{view Todos.EditTodoTextField todoBinding="todo"}}
+            {{else}}
+                <input type="checkbox"
+                       class="toggle"
+                    {{bindAttr checked="todo.completed"}}
+                    {{action toggleTodo todo}}
+                        >
+                <label>{{todo.title}}</label>
+                <button {{action removeTodo todo}} class="destroy"></button>
+            {{/if}}
+        </li>
+    {{/each}}
 </ul>
