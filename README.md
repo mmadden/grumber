@@ -30,8 +30,7 @@ and production minification
 * optional built-in web server for development/testing (enabled by default)
 
 ### To Do
-* ~~Foundation 4 integration~~
-* refactor TodoMVC app templates/styles for Foundation
+* re-style TodoMVC with Foundation
 * live reload that works on Windows?
 * swap out TodoMVC for an "ambitious web application"
 * QUnit tests?
@@ -48,6 +47,8 @@ First, ensure all dependencies are installed and up-to-date:
 `[sudo] npm install grunt-cli -g`
 * [Bower](http://twitter.github.com/bower/)
 `[sudo] npm install bower -g`
+
+Also needed if you will be using SCSS and Foundation:
 * [Ruby](http://www.ruby-lang.org/en/downloads/)
 * [Compass](http://compass-style.org/install/)
 `gem install compass`
