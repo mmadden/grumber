@@ -1,15 +1,9 @@
 # Grumber
 
 Grumber is a starter kit for front-end JavaScript projects based on
-[Ember](http://emberjs.com/), [Grunt](http://gruntjs.com), and [HTML5 Boilerplate](http://www.initializr.com/).
+[Ember](http://emberjs.com/), [Grunt](http://gruntjs.com), and [HTML5 Boilerplate](http://www.initializr.com/). Bootstrap your Ember application with modern conveniences that no front-end developer should be without.
 
-	Grunt + Ember = Grumber
-
-If you already love Ember.js or are just getting started with it, this is meant to bootstrap your application with modern conveniences that no front-end developer should be without. It is lean and mostly free of project-specific choices that sometimes exist in other starter kits (e.g. module system, scaffolding tool, CSS framework, compiler, etc.). Choose your own adventure and integrate these with your project as needed!
-
-If you are looking for something beefier check out the promising [Ember App Kit](http://github.com/stefanpenner/ember-app-kit).  
-
-Special thanks to [Trek Glowacki](http://github.com/trek) for his [ember-todos](http://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences) project which inspired my first attempts to Grunt out-loud.
+Special thanks to [Trek Glowacki](http://github.com/trek) for his [ember-todos](http://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences) project.
 
 ## Features
 
@@ -20,6 +14,11 @@ Special thanks to [Trek Glowacki](http://github.com/trek) for his [ember-todos](
 * applies coding standards using [jshint](http://www.jshint.com/)
 * watches source files for changes, rebuilds and activates LiveReload in browser
 * built-in web server for development (optional)
+
+I have decided to keep this boilerplate lean and without dependencies that your project may or may not
+require (e.g. module system, scaffolding tools, CSS framework, compiler, etc.), especially since any task you could imagine
+can be easily integrated later. Also take a look at [Ember App Kit](http://github.com/stefanpenner/ember-app-kit)
+if you need something more comprehensive.
 
 
 ## Getting Started
