@@ -12,5 +12,8 @@ module.exports = {
     },
     css: {
         files: ['styles/**/*.css']
+    },
+    html: {
+        files: ['**/*.html', '**/*.htm']
     }
 };
