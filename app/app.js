@@ -1,5 +1,5 @@
 window.App = Ember.Application.create({
-    LOG_ACTIVE_GENERATION: true,
+    LOG_ACTIVE_GENERATION: false,
     LOG_BINDINGS: false,
     LOG_STACKTRACE_ON_DEPRECATION: true,
     LOG_TRANSITIONS: true,
