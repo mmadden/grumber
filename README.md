@@ -1,25 +1,18 @@
 # Grumber
 
-Grumber is a starter kit for front-end JavaScript projects based on
-[Ember](http://emberjs.com/), [Grunt](http://gruntjs.com), and [HTML5 Boilerplate](http://www.initializr.com/). Bootstrap your Ember application with modern conveniences that no front-end developer should be without.
-
-Special thanks to [Trek Glowacki](http://github.com/trek) for his [ember-todos](http://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences) project.
+Launch your next Ember project with modern conveniences that no front-end developer should be without. Grumber is a lean and simple boilerplate for your next front-end JavaScript project based on [Ember](http://emberjs.com/), [Grunt](http://gruntjs.com), and [HTML5 Boilerplate](http://www.initializr.com/).
 
 ## Features
 
-* simple build process using [Grunt](http://gruntjs.com/)
-* pre-compiles [Handlebars](http://handlebarsjs.com/) templates
-* concatenates JS files and generates a [Source Map](http://net.tutsplus.com/tutorials/tools-and-tips/source-maps-101/)
-* production JS minification with [UglifyJS](http://lisperator.net/uglifyjs/)
-* applies coding standards using [jshint](http://www.jshint.com/)
+* simple and flexible build process using [Grunt](http://gruntjs.com/)
 * watches source files for changes, rebuilds and activates LiveReload in browser
-* built-in web server for development (optional)
+* concatenates JS files and generates a [Source Map](http://net.tutsplus.com/tutorials/tools-and-tips/source-maps-101/)
+* applies your coding standards using [jshint](http://www.jshint.com/)
+* pre-compiles [Handlebars](http://handlebarsjs.com/) templates
+* production JS minification with [UglifyJS](http://lisperator.net/uglifyjs/)
+* built-in web server for prototyping until your server/API is ready
 
-I have decided to keep this boilerplate lean and without dependencies that your project may or may not
-require (e.g. module system, scaffolding tools, CSS framework, compiler, etc.), especially since any task you could imagine
-can be easily integrated later. Also take a look at [Ember App Kit](http://github.com/stefanpenner/ember-app-kit)
-if you need something more comprehensive.
-
+I am leaving out extras like a scaffolding tool, module loader, CSS framework/compiler, etc. since your projects and tastes are likely to be different than my own. My hope is that you can quickly integrate anything you need. This is meant to be lightweight. If you are looking for something heavier and more opinionated, check out [Ember App Kit](http://github.com/stefanpenner/ember-app-kit).
 
 ## Getting Started
 
@@ -86,3 +79,8 @@ grunt dist
 
 This task is setup to lint the application code, clean the target directories, pre-compile 
 the templates, concatenate, and minify the JS.
+
+
+## Gratitude
+ 
+Thanks to [Trek Glowacki](http://github.com/trek) for his [ember-todos](http://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences) project which helped me learn Grunt when it wasn't so easy.
