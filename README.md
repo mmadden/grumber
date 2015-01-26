@@ -1,3 +1,5 @@
+### Notice: This project is no longer maintained as [ember-cli](http://www.ember-cli.com) (recommended) and Gulp ecosystems have matured.
+
 # Grumber
 
 Launch your next Ember project with modern conveniences that no front-end developer should be without. Grumber is a lean and simple boilerplate for your next front-end JavaScript project based on [Ember](http://emberjs.com/), [Grunt](http://gruntjs.com), and [HTML5 Boilerplate](http://www.initializr.com/).
@@ -12,7 +14,8 @@ Launch your next Ember project with modern conveniences that no front-end develo
 * production JS minification with [UglifyJS](http://lisperator.net/uglifyjs/)
 * built-in web server for prototyping until your server/API is ready
 
-I am leaving out extras like a scaffolding tool, module loader, CSS framework/compiler, etc. since your projects and tastes are likely to be different than my own. My hope is that you can quickly integrate anything you need. This is meant to be lightweight. If you are looking for something heavier and more opinionated, check out [Ember App Kit](http://github.com/stefanpenner/ember-app-kit).
+I am leaving out extras like a scaffolding tool, module loader, CSS framework/compiler, etc. since your projects and tastes are likely to be different than my own. My hope is that you can quickly integrate anything you need. This is meant to be lightweight. ~~If you are looking for something heavier and more opinionated, check out Ember App Kit.~~
+
 
 ## Getting Started
 
